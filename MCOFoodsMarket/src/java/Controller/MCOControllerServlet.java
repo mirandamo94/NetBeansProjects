@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Session.OrderManager;
 import Entity.Cuisine;
 import Entity.Product;
 import Session.CuisineFacade;
@@ -40,6 +41,8 @@ public class MCOControllerServlet extends HttpServlet {
 
     @EJB
     private CuisineFacade cuisineFacade;
+    @EJB
+    private OrderManager orderManager;
     @EJB
     private ProductFacade productFacade;
     
@@ -140,6 +143,7 @@ public class MCOControllerServlet extends HttpServlet {
             
             userPath = "/cuisine";
 
+            
         // if updateCart action is called
         } else if (userPath.equals("/updateCart")) {
             // TODO: Implement update cart action
@@ -148,9 +152,22 @@ public class MCOControllerServlet extends HttpServlet {
             Product product = productFacade.find(Integer.parseInt(productID));
             cart.updateItem(quan,product);
             userPath = "/cart";
+            
         // if purchase action is called
         } else if (userPath.equals("/purchase")) {
             // TODO: Implement purchase action
+
+            if (cart != null) {
+                //make sure user's cart is not empty before requesting an order and user information
+                String name = request.getParameter("name");
+                String email = request.getParameter("email");
+                String phone = request.getParameter("phone");
+                String address = request.getParameter("address");
+                String location = request.getParameter("location");
+                String cc = request.getParameter("creditCardNum");
+                
+                int orderId = orderManager.placeOrder(name,email,phone,address,location,cc);
+            }
 
             userPath = "/confirmation";
         }

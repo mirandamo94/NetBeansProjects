@@ -3,7 +3,9 @@
     Created on : May 20, 2018, 7:18:09 PM
     Author     : mirandamo
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@taglib prefix= "fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,7 +104,8 @@
 }
     </style>
 </head>
-<body>      
+<body>    
+    <c:set var='view' value='/cart' scope = 'session'/>
     <div id="singleColumn">
 
     <c:choose>
@@ -125,7 +128,7 @@
                 <c:param name="clear" value="true"/>
             </c:url>
 
-            <a href="${url}" class="bubble hMargin"><fmt:message key="clearCart"/></a>
+            <a href="${url}" class="bubble hMargin">cart is empty</a>
         </c:if>
 
         <%-- continue shopping  --%>
@@ -142,9 +145,9 @@
         </c:set>
 
         <c:url var="url" value="${value}"/>
-        <a href="${url}" class="bubble hMargin"><fmt:message key="continueShopping"/></a>
+        <a href="${url}" class="bubble hMargin">continue shopping</a>
 
-        <%-- checkout --%>
+        
         <c:if test="${!empty cart && cart.itemNum != 0}">
             <a href="<c:url value='checkout'/>" class="bubble hMargin">
                 <fmt:message key="proceedCheckout"/></a>
@@ -173,10 +176,10 @@
           <tr class="${((iter.index % 2) == 0) ? 'lightPink' : 'white'}">
             <td>
                 <img src="mcoFoodsMarket/${product.name}.jpg"
-                     alt="<fmt:message key="${product.name}"/>">
+                     alt="${product.name}/">
             </td>
 
-            <td><fmt:message key="${product.name}"/></td>
+            <td>"${product.name}"</td>
 
             <td>
                 <fmt:formatNumber type="currency" currencySymbol="&#036; " value="${cartItem.totalAmount}"/>

@@ -85,7 +85,8 @@ hr {
 }
     </style>
 </head>
-<body>      
+<body>   
+    <c:set var='view' value='/checkout' scope = 'session'/>
     <div id="main">
         <div id="header">
             <div id="widgetBar">

@@ -6,6 +6,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@taglib prefix= "fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>   
 <html>
@@ -125,9 +126,7 @@ body {
     </style>
 </head>
 <body> 
-   
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<c:set var='view' value='/cuisine' scope = 'session'/>  
 
 <sql:query var="categories" dataSource="jdbc/mcofoodsmarket">
     SELECT * FROM cuisine

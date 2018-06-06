@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "UserOrder.findAll", query = "SELECT u FROM UserOrder u")
     , @NamedQuery(name = "UserOrder.findById", query = "SELECT u FROM UserOrder u WHERE u.id = :id")
+    , @NamedQuery(name = "UserOrder.findByCustomer", query = "SELECT u FROM UserOrder u WHERE u.user = :user")
     , @NamedQuery(name = "UserOrder.findByAmount", query = "SELECT u FROM UserOrder u WHERE u.amount = :amount")
     , @NamedQuery(name = "UserOrder.findByDateCreated", query = "SELECT u FROM UserOrder u WHERE u.dateCreated = :dateCreated")
     , @NamedQuery(name = "UserOrder.findByConfirmationNumber", query = "SELECT u FROM UserOrder u WHERE u.confirmationNumber = :confirmationNumber")})
@@ -68,7 +69,7 @@ public class UserOrder implements Serializable {
     private User userId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userOrder")
     private Collection<OrderedProduct> orderedProductCollection;
-
+    private User user;
     public UserOrder() {
     }
 
@@ -130,6 +131,14 @@ public class UserOrder implements Serializable {
 
     public void setOrderedProductCollection(Collection<OrderedProduct> orderedProductCollection) {
         this.orderedProductCollection = orderedProductCollection;
+    }
+    
+    public User getUser(){
+        return user;
+    }
+    
+    public void setUser(User user){
+        this.user = user;
     }
 
     @Override
