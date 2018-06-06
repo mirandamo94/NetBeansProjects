@@ -1,6 +1,6 @@
 <%-- 
     Document   : mycart
-    Created on : Jun 1, 2018, 7:18:09 PM
+    Created on : May 20, 2018, 7:18:09 PM
     Author     : mirandamo
 --%>
 
@@ -106,11 +106,11 @@
     <div id="singleColumn">
 
     <c:choose>
-        <c:when test="${cart.numberOfItems > 1}">
-            <p><fmt:message key="yourCartContains"/> ${cart.numberOfItems} <fmt:message key="items"/>.</p>
+        <c:when test="${cart.itemNum > 1}">
+            <p><fmt:message key="yourCartContains"/> ${cart.itemNum} <fmt:message key="items"/>.</p>
         </c:when>
-        <c:when test="${cart.numberOfItems == 1}">
-            <p><fmt:message key="yourCartContains"/> ${cart.numberOfItems} <fmt:message key="item"/>.</p>
+        <c:when test="${cart.itemNum == 1}">
+            <p><fmt:message key="yourCartContains"/> ${cart.itemNum} <fmt:message key="item"/>.</p>
         </c:when>
         <c:otherwise>
             <p><fmt:message key="yourCartEmpty"/></p>
@@ -118,8 +118,8 @@
     </c:choose>
 
     <div id="actionBar">
-        <%-- clear cart widget --%>
-        <c:if test="${!empty cart && cart.numberOfItems != 0}">
+        
+        <c:if test="${!empty cart && cart.itemNum != 0}">
 
             <c:url var="url" value="viewCart">
                 <c:param name="clear" value="true"/>
@@ -134,7 +134,7 @@
                 <c:when test="${!empty selectedcuisine}">
                     cuisine
                 </c:when>
-                <%-- otherwise send user to welcome page --%>
+                
                 <c:otherwise>
                     index.jsp
                 </c:otherwise>
@@ -145,16 +145,16 @@
         <a href="${url}" class="bubble hMargin"><fmt:message key="continueShopping"/></a>
 
         <%-- checkout --%>
-        <c:if test="${!empty cart && cart.numberOfItems != 0}">
+        <c:if test="${!empty cart && cart.itemNum != 0}">
             <a href="<c:url value='checkout'/>" class="bubble hMargin">
                 <fmt:message key="proceedCheckout"/></a>
         </c:if>
     </div>
 
-    <c:if test="${!empty cart && cart.numberOfItems != 0}">
+    <c:if test="${!empty cart && cart.itemNum != 0}">
 
-      <h4 id="subtotal"><fmt:message key="subtotal"/>:
-          <fmt:formatNumber type="currency" currencySymbol="&#036; " value="${cart.subtotal}"/>
+      <h4 id="totalAmount"><fmt:message key="totalAmount"/>:
+          <fmt:formatNumber type="currency" currencySymbol="&#036; " value="${cart.totalAmount}"/>
       </h4>
 
       <table id="cartTable">
@@ -172,14 +172,14 @@
 
           <tr class="${((iter.index % 2) == 0) ? 'lightPink' : 'white'}">
             <td>
-                <img src="${initParam.productImagePath}${product.name}.png"
+                <img src="mcoFoodsMarket/${product.name}.jpg"
                      alt="<fmt:message key="${product.name}"/>">
             </td>
 
             <td><fmt:message key="${product.name}"/></td>
 
             <td>
-                <fmt:formatNumber type="currency" currencySymbol="&#036; " value="${cartItem.total}"/>
+                <fmt:formatNumber type="currency" currencySymbol="&#036; " value="${cartItem.totalAmount}"/>
                 <br>
                 <span class="smallText">(
                     <fmt:formatNumber type="currency" currencySymbol="&#036; " value="${product.price}"/>

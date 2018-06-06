@@ -90,7 +90,7 @@ body {
     border-radius: 4px;
 }
 
-#selectedcuisine {
+#selectedCuisine {
     background-color: #b3d2d2;
     margin-left: 10px;
     width: 139px;
@@ -148,7 +148,7 @@ body {
                 <c:forEach var="cuisine" items="${categories.rows}">
                     <c:choose>
                         <c:when test="${cuisine.id == pageContext.request.queryString}">
-                            <div class="cuisineButton" id="selectedcuisine">
+                            <div class="cuisineButton" id="selectedCuisine">
                                 <span class="cuisineText">
                                     ${cuisine.name}
                                 </span>
@@ -169,11 +169,15 @@ body {
 
             <div id="cuisineRightColumn">
 
-                <p id="cuisineTitle">${selectedcuisine.rows[0].name}</p>
+                <p id="cuisineTitle">
+                    
+                    ${selectedCuisine.rows[0].name}
+                
+                </p>
 
                 <table id="productTable">
 
-                    <c:forEach var="product" items="${cuisineProducts.rows}" varStatus="iter">
+                    <c:forEach var="product" items="${cuisineProducts}" varStatus="iter">
 
                         <tr class="${((iter.index % 2) == 0) ? 'lightPink' : 'white'}">
                             <td>
