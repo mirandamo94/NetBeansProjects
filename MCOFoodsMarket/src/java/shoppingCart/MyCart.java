@@ -33,8 +33,8 @@ public class MyCart {
         return items;
     }
     
-    public sychronized void updateItem(String quantity, Product product){
-        short q = Short.parseShort(quantity);
+    public sychronized void updateItem(String quan, Product product){
+        short q = Short.parseShort(quan);
         if (q >= 0){
             MyCartItems item = null;
             for (MyCartItems i: items){

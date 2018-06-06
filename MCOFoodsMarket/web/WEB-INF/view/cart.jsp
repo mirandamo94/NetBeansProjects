@@ -128,10 +128,9 @@
             <a href="${url}" class="bubble hMargin"><fmt:message key="clearCart"/></a>
         </c:if>
 
-        <%-- continue shopping widget --%>
+        <%-- continue shopping  --%>
         <c:set var="value">
             <c:choose>
-                <%-- if 'selectedcuisine' session object exists, send user to previously viewed cuisine --%>
                 <c:when test="${!empty selectedcuisine}">
                     cuisine
                 </c:when>
@@ -145,9 +144,10 @@
         <c:url var="url" value="${value}"/>
         <a href="${url}" class="bubble hMargin"><fmt:message key="continueShopping"/></a>
 
-        <%-- checkout widget --%>
+        <%-- checkout --%>
         <c:if test="${!empty cart && cart.numberOfItems != 0}">
-            <a href="<c:url value='checkout'/>" class="bubble hMargin"><fmt:message key="proceedCheckout"/></a>
+            <a href="<c:url value='checkout'/>" class="bubble hMargin">
+                <fmt:message key="proceedCheckout"/></a>
         </c:if>
     </div>
 

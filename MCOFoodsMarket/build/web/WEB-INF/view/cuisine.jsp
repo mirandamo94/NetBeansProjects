@@ -190,7 +190,7 @@ body {
                                 &#36; ${product.price} / serving
                             </td>
                             <td>
-                                <form action="addToCart" method="post">
+                                <form action="<c:url value='addToCart'/>" method="post">
                                     <input type="hidden"
                                            name="productId"
                                            value="${product.id}">
