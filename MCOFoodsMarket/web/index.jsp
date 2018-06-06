@@ -1,17 +1,18 @@
 <%-- 
     Document   : index
-    Created on : Jun 1, 2018, 7:15:56 PM
+    Created on : May 20, 2018, 7:15:56 PM
     Author     : mirandamo
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@taglib prefix= "fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
    <style>
        body {
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: Raleway Bold;
         width: 1500px;
         text-align: center;
         margin: 20px auto;
@@ -121,18 +122,24 @@
     }
 </style>
 </head>
-<body>        
+<body>  
+    
 <c:set var='view' value='/index' scope='session' />
-
-
-<%-- HTML markup starts below --%>
     
 <div id="indexLeftColumn">
     <div id="welcomeText">
-        <p style="font-size: larger"><fmt:message key='greeting' /></p>
-
-        <p><fmt:message key='introText' /></p>
-        <!-- test to access context parameters -->
+        
+        <p style="font-size: larger">Hello! Welcome to MCO Food Market, hope you came hungry!</p>
+        <p>Founded in 2018, we offer some of the best food in Chicago</p>
+        <p>Every meal is freshly made with free delivery right to your door</p>
+        <p></p>
+        <p></p>
+        <p>We offer some of the best food in Chicago</p>
+        <p>Click on each individual cuisine box to see what's on the menu this week!</p>
+        <p></p>
+        <p></p>
+        <p>five-star customer service, speed delivery</p>
+       
         
     </div>
 </div>

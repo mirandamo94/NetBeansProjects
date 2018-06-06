@@ -19,10 +19,11 @@
             #header {
                 width: 1500px;
                 height: 200px;
-                
+                background-image: url(mcoFoodsMarket/banner.png);
             }
 
             #logo {
+                
                 float: left;
                 margin-left: 30px;
                 margin-top: 20px;
@@ -30,7 +31,8 @@
             }
 
             #logoText {
-                text-align: left;
+                
+                float: left;
                 margin: 20px 70px;
                 font-family: 'American Typewriter', Courier, monospace;
                 font-size: 50px;
@@ -44,7 +46,7 @@
             }
 
             #cart {
-                position: absolute;
+                float: right;
                 margin: 5px 0 0 2px;
             }
 
@@ -54,7 +56,7 @@
             }
 
             #viewCart {
-                text-align: left;
+                text-align: right;
                 width: 210px;
             }
 
@@ -89,7 +91,7 @@
                                   orderFailureFlag ne true}">
 
                       <a href="<c:url value='checkout'/>" class="bubble">
-                        <fmt:message key="proceedCheckout"/>
+                        click here to check out
                       </a>
                     </c:if>
                   </div>
@@ -113,15 +115,15 @@
                   
                       <c:choose>
                         <c:when test="${cart.numberOfItems == 1}">
-                          <fmt:message key="item" />
+                          item
                         </c:when>
                         <c:when test="${cart.numberOfItems == 2 ||
                                         cart.numberOfItems == 3 ||
                                         cart.numberOfItems == 4}">
-                          <fmt:message key="items2-4" />
+                          items
                         </c:when>
                         <c:otherwise>
-                          <fmt:message key="items" />
+                          items
                         </c:otherwise>
                       </c:choose>
                     </span>
@@ -132,7 +134,7 @@
                                   requestScope['javax.servlet.forward.servlet_path'] ne '/cart'}">
 
                       <a href="<c:url value='viewCart'/>" class="bubble">
-                          <fmt:message key="cart" />
+                          click here to view your cart
                       </a>
                     </c:if>
                   </div>

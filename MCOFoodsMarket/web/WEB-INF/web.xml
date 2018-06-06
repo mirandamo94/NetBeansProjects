@@ -25,6 +25,10 @@
         <param-name>cuisineImagepath</param-name>
         <param-value>mcoFoodsMarket/cuisine/</param-value>
     </context-param>
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.localicationContext</param-name>
+        <param-value>Messages.messages</param-value>
+    </context-param>
     <session-config>
         <session-timeout>
             30

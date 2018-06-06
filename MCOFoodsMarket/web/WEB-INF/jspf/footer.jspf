@@ -2,10 +2,10 @@
 <head>
     <style>
         #footer {
-        height: 60px;
-        width: 1200px;
+        height: 100px;
+        width: 1500px;
         clear: left;
-        background-color: #ffffff
+        background-image: url(mcoFoodsMarket/footer.png)
     }
 
         #footerText { margin-top: 10px }
@@ -19,7 +19,7 @@
     <body>
     <div id="footer">
                 <hr>
-                <p id="footerText">[ MCO Food Market 2018 ]</p>
+                
             </div>
     </body>
 </html>
