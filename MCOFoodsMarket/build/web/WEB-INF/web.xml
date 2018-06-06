@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <context-param>
+        <description>chinese food</description>
+        <param-name>chineseImagePath</param-name>
+        <param-value>mcoFoodsMarket/Chinese/</param-value>
+    </context-param>
+    <context-param>
+        <description>japanese
+</description>
+        <param-name>japaneseImagePath</param-name>
+        <param-value>mcoFoodsMarket/Japanese/</param-value>
+    </context-param>
+    <context-param>
+        <description>american</description>
+        <param-name>americanImagePath</param-name>
+        <param-value>mcoFoodsMarket/American/</param-value>
+    </context-param>
+    <context-param>
+        <description>italian</description>
+        <param-name>italianImagePath</param-name>
+        <param-value>mcoFoodsMarket/Italian</param-value>
+    </context-param>
+    <context-param>
+        <description>cuisine images</description>
+        <param-name>cuisineImagepath</param-name>
+        <param-value>mcoFoodsMarket/cuisine</param-value>
+    </context-param>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <jsp-config>
+        <jsp-property-group>
+            <description>header and footer settings</description>
+            <url-pattern>/index.jsp</url-pattern>
+            <url-pattern>/WEB-INF/view/*</url-pattern>
+            <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
+            <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
+        </jsp-property-group>
+    </jsp-config>
+    <resource-ref>
+        <description>helps to connect food market</description>
+        <res-ref-name>jdbc/mcofoodsmarket</res-ref-name>
+        <res-type>javax.sql.ConnectionPoolDataSource</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
+</web-app>

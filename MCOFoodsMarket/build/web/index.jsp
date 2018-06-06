@@ -1,0 +1,154 @@
+<%-- 
+    Document   : index
+    Created on : Jun 1, 2018, 7:15:56 PM
+    Author     : mirandamo
+--%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<!DOCTYPE html>
+<html>
+<head>
+   <style>
+        body {
+        font-family: Arial, Helvetica, sans-serif;
+        width: 1500px;
+        text-align: center;
+        margin: 20px auto;
+        color: #ebc5cf;
+        }
+        hr {
+            border: 0;
+            background-color: #333;
+            height: 1px;
+        }
+        table {
+            margin: 0 20px;
+            border-spacing: 0;
+            text-align: center;
+            border: solid 1px #f5eabe;
+        }
+        a {
+            color: inherit;
+            text-decoration: underline;
+        }
+        a:hover { text-decoration: none }
+        a:visited { color: inherit }
+        img { border: none }
+        input, select { margin: 5px }
+        li { margin: 10px 0 }
+        label { line-height: 30px }
+        label.error {
+            font-size: smaller;
+            line-height: 20px;
+            font-style: italic;
+        }
+    #main { background: #ffffff }
+    #singleColumn {
+        margin: 20px 30px;
+        text-align: left;
+    }
+    .lightPink { background-color: #ebc5cf }
+    .white { background-color: #fff }
+    .bubble {
+        font-weight: bold;
+        background-color: #f5eabe;
+        padding: 5px;
+        color: inherit;
+        display: inline;
+        border-radius: 4px;
+    }
+    .hMargin { margin: 0 30px }
+    .smallText { font-size: small }
+    .reallySmallText { font-size: xx-small }
+    .header {
+        background-color: #ffffff;
+        height: 30px;
+    }
+    .error {
+        color: #c00;
+        font-style: italic;
+    }
+    .tableHeading {
+        font-weight: bold;
+        background-color: #edf8f7;
+    }
+    #indexLeftColumn {
+        text-align: left;
+        height: 600px;
+        width: 350px;
+        float: left;
+        background-color: #c3e3e0
+    }
+    #indexRightColumn {
+        text-align: right;
+        height: 600px;
+        width: 900px;
+        float: left;
+        background-color: #ebc5cf
+    }
+    #welcomeText {
+        margin: 30px 5px 0 30px;
+        line-height: 1.4em;
+    }
+    .cuisineBox {
+        height: 260px;
+        width: 260px;
+        margin: 21px 14px 6px;
+        float: left;
+        background-color: #c3e3e5
+    }
+    .cuisineBox a { text-decoration: none }
+    .cuisineLabel {
+        position: absolute;
+        background-color: #ffffff;
+        opacity: 0.7;
+        height: 40px;
+        width: 260px;
+        margin: 2px;
+    }
+    .cuisineLabelText {
+        position: absolute;
+        line-height: 150%;
+        font-size: x-large;
+        margin: 3px 10px;
+    }
+    .cuisineImage {
+        padding: 1px;
+        border:solid 1px #555;
+    }
+</style>
+</head>
+<body>        
+<c:set var='view' value='/index' scope='session' />
+
+
+<%-- HTML markup starts below --%>
+    
+<div id="indexLeftColumn">
+    <div id="welcomeText">
+        <p style="font-size: larger"><fmt:message key='greeting' /></p>
+
+        <p><fmt:message key='introText' /></p>
+        <!-- test to access context parameters -->
+        
+    </div>
+</div>
+
+<div id="indexRightColumn">
+    <c:forEach var="cuisine" items="${cuisine.rows}">
+    </c:forEach>
+    <c:forEach var="cuisine" items="${cuisines}">
+        <div class="cuisineBox">
+            <a href="<c:url value='cuisine?${cuisine.id}'/>">
+                <span class="cuisineLabel"></span>
+                <span class="cuisineLabelText">${cuisine.name}</span>
+
+                <img src="${initParam.cuisineImagePath}${cuisine.name}.jpg"
+                     alt="<fmt:message key='${cuisine.name}'/>" class="cuisineImage">
+            </a>
+        </div>
+    </c:forEach>
+</div>
+</body>
+</html>

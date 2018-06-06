@@ -1,0 +1,25 @@
+<html>
+<head>
+    <style>
+        #footer {
+        height: 60px;
+        width: 350px;
+        clear: left;
+        background-color: #ebc5cf
+    }
+
+        #footerText { margin-top: 5px }
+
+        #footerDivider {
+            margin: 0 25px;
+            width: 300px;
+        }
+    </style>
+</head>
+    <body>
+    <div id="footer">
+                <hr>
+                <p id="footerText">[ MCO Food Market 2018 ]</p>
+            </div>
+    </body>
+</html>
