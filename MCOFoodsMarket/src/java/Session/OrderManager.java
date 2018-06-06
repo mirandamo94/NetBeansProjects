@@ -8,12 +8,17 @@ package Session;
 
 import Entity.OrderedProduct;
 import Entity.OrderedProductPK;
+import Entity.Product;
 import Entity.User;
 import Entity.UserOrder;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -32,11 +37,20 @@ import shoppingCart.MyCartItems;
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class OrderManager {
+    
+    @EJB
+    private ProductFacade productFacade;
+    @EJB
+    private UserOrderFacade userOrderFacade;
+    @EJB
+    private OrderedProductFacade orderedProductFacade;
+    
     @Resource
     private SessionContext context;
     @PersistenceContext(unitName = "MCOFoodsMarketPU")
     private EntityManager em;
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    
     public int placeOrder(String name, String email, String phone, String address, String location, String cc, MyCart cart) {
         try{
         User user = addUser(name,email,phone,address,location,cc);
@@ -88,5 +102,25 @@ public class OrderManager {
         int orderNum = randomNum.nextInt(999999999);
         order.setConfirmationNumber(orderNum);
         return order;
+    }
+    
+    public Map getOrderDetails(int orderId){
+        Map map = new HashMap();
+        UserOrder o;
+        o = userOrderFacade.find(orderId);
+        User u = o.getUser();
+        List<OrderedProduct> ordered = OrderedProductFacade.findByOrderId(orderId);
+        List<Product> p = new ArrayList<Product>();
+        for (OrderedProduct op: ordered){
+            Product pro;
+            pro = (Product) productFacade.find(op.getOrderedProductPK().getProductId());
+            p.add(pro);
+        
+        }
+        map.put("orderRecord", o);
+        map.put("user", u);
+        map.put("products", p);
+        map.put("orderedProducts", ordered);
+        return map;
     }
 }

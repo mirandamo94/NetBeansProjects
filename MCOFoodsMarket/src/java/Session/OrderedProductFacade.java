@@ -6,6 +6,7 @@
 package Session;
 
 import Entity.OrderedProduct;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,6 +17,10 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class OrderedProductFacade extends AbstractFacade<OrderedProduct> {
+
+    static List<OrderedProduct> findByOrderId(int orderId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @PersistenceContext(unitName = "MCOFoodsMarketPU")
     private EntityManager em;

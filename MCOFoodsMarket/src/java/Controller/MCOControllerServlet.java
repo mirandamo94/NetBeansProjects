@@ -12,6 +12,7 @@ import Session.CuisineFacade;
 import Session.ProductFacade;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -166,10 +167,24 @@ public class MCOControllerServlet extends HttpServlet {
                 String location = request.getParameter("location");
                 String cc = request.getParameter("creditCardNum");
                 
-                int orderId = orderManager.placeOrder(name,email,phone,address,location,cc);
+                
+                int orderId = orderManager.placeOrder(name,email,phone,address,location,cc,cart);
+                
+                if (orderId !=0){
+                    cart = null;
+                    Map orderMap = orderManager.getOrderDetails(orderId);
+                    request.setAttribute("user",orderMap.get("user"));
+                    request.setAttribute("products",orderMap.get("products"));
+                    request.setAttribute("orderedProducts",orderMap.get("orderedProducts"));
+                    request.setAttribute("orderRecord",orderMap.get("orderRecord"));
+                     userPath = "/confirmation";
+                }
+                else{
+                userPath = "/checkout";
+                }
             }
 
-            userPath = "/confirmation";
+           
         }
 
         // use RequestDispatcher to forward request internally

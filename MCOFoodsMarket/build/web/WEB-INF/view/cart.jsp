@@ -110,13 +110,13 @@
 
     <c:choose>
         <c:when test="${cart.itemNum > 1}">
-            <p><fmt:message key="yourCartContains"/> ${cart.itemNum} <fmt:message key="items"/>.</p>
+            <p>Your Cart Contains ${cart.itemNum} items </p>
         </c:when>
         <c:when test="${cart.itemNum == 1}">
-            <p><fmt:message key="yourCartContains"/> ${cart.itemNum} <fmt:message key="item"/>.</p>
+            <p>Your Cart Contains ${cart.itemNum} item </p>
         </c:when>
         <c:otherwise>
-            <p><fmt:message key="yourCartEmpty"/></p>
+            <p>Your Cart is currently empty</p>
         </c:otherwise>
     </c:choose>
 
@@ -150,14 +150,13 @@
         
         <c:if test="${!empty cart && cart.itemNum != 0}">
             <a href="<c:url value='checkout'/>" class="bubble hMargin">
-                <fmt:message key="proceedCheckout"/></a>
+                proceed to checkout </a>
         </c:if>
     </div>
 
     <c:if test="${!empty cart && cart.itemNum != 0}">
 
-      <h4 id="totalAmount"><fmt:message key="totalAmount"/>:
-          <fmt:formatNumber type="currency" currencySymbol="&#036; " value="${cart.totalAmount}"/>
+      <h4 id="totalAmount">Total Amount: $"${cart.totalAmount}"/>
       </h4>
 
       <table id="cartTable">

@@ -29,4 +29,10 @@ public class UserOrderFacade extends AbstractFacade<UserOrder> {
         super(UserOrder.class);
     }
     
+    
+    public UserOrder find(Object id){
+        UserOrder o = em.find(UserOrder.class,id);
+        em.refresh(o);
+        return o;
+    }
 }
