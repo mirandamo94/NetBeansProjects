@@ -1,21 +1,37 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
 <html>
     <head>
         <style>
+            .lightPink { background-color: #ebc5cf }
+            .white { background-color: #ffffff }
+            .bubble {
+                font-weight: bold;
+                background-color: #f5eabe;
+                padding: 5px;
+                color: inherit;
+                display: inline;
+                border-radius: 4px;
+            }
             #header {
-                width: 1200px;
-                height: 250px;
-                background: url(../img/stalk.png) no-repeat 28px 28px;
+                width: 1500px;
+                height: 200px;
+                
             }
 
             #logo {
                 float: left;
                 margin-left: 30px;
-                margin-top: -20px;
+                margin-top: 20px;
+                
             }
 
             #logoText {
-                float: left;
-                margin: 20px 0 0 70px;
+                text-align: left;
+                margin: 20px 70px;
                 font-family: 'American Typewriter', Courier, monospace;
                 font-size: 50px;
                 color: #333;
@@ -52,25 +68,81 @@
         </style>
     </head>
     
-    <body>      
+    <body>
         <div id="main">
             <div id="header">
                 <div id="widgetBar">
+                    <div id="logoText"> [ MCO Food Market]
+                  <div class="headerWidget">
+                      
+                     
+                      
+                    <c:if test="${!empty cart && cart.numberOfItems != 0 &&
 
+                                  !fn:contains(pageContext.request.servletPath,'/checkout') &&
+                                  requestScope['javax.servlet.forward.servlet_path'] ne '/checkout' &&
 
-            <div class="headerWidget">
-                [ shopping cart widget ]
-            </div>
+                                  !fn:contains(pageContext.request.servletPath,'/cart') &&
+                                  requestScope['javax.servlet.forward.servlet_path'] ne '/cart' &&
 
-        </div>
+                                  validationErrorFlag ne true &&
+                                  orderFailureFlag ne true}">
 
-            <a href="#">
-                <img src="#" id="logo" alt="MCO logo">
-            </a>
+                      <a href="<c:url value='checkout'/>" class="bubble">
+                        <fmt:message key="proceedCheckout"/>
+                      </a>
+                    </c:if>
+                  </div>
 
-            <img src="#" id="logoText" alt="MCO Food Market">
+              
+                  <div class="headerWidget" id="viewCart">
+
+                    <img src="mcoFoodsMarket/cart.png" id="cart" width="30" height="30">
+
+               
+                    <span class="horizontalMargin">
+                      <c:choose>
+                        <c:when test="${cart.numberOfItems == null}">
+                          0
+                        </c:when>
+                        <c:otherwise>
+                          ${cart.numberOfItems}
+                        </c:otherwise>
+                      </c:choose>
+
+                  
+                      <c:choose>
+                        <c:when test="${cart.numberOfItems == 1}">
+                          <fmt:message key="item" />
+                        </c:when>
+                        <c:when test="${cart.numberOfItems == 2 ||
+                                        cart.numberOfItems == 3 ||
+                                        cart.numberOfItems == 4}">
+                          <fmt:message key="items2-4" />
+                        </c:when>
+                        <c:otherwise>
+                          <fmt:message key="items" />
+                        </c:otherwise>
+                      </c:choose>
+                    </span>
+
+                    <c:if test="${!empty cart && cart.numberOfItems != 0 &&
+
+                                  !fn:contains(pageContext.request.servletPath,'/cart') &&
+                                  requestScope['javax.servlet.forward.servlet_path'] ne '/cart'}">
+
+                      <a href="<c:url value='viewCart'/>" class="bubble">
+                          <fmt:message key="cart" />
+                      </a>
+                    </c:if>
+                  </div>
                 </div>
+
+                <a href="<c:url value='/'/>">
+                    <img src="mcoFoodsMarket/logo.png" id="logo" width="80" height="80">
+                </a>
+
+               </div> 
             </div>
     </body>
-    
 </html>

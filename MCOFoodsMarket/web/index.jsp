@@ -10,12 +10,12 @@
 <html>
 <head>
    <style>
-        body {
+       body {
         font-family: Arial, Helvetica, sans-serif;
         width: 1500px;
         text-align: center;
         margin: 20px auto;
-        color: #ebc5cf;
+        color: #2f4f4f;
         }
         hr {
             border: 0;
@@ -43,13 +43,15 @@
             line-height: 20px;
             font-style: italic;
         }
+        
     #main { background: #ffffff }
+    
     #singleColumn {
         margin: 20px 30px;
         text-align: left;
     }
     .lightPink { background-color: #ebc5cf }
-    .white { background-color: #fff }
+    .white { background-color: #ffffff }
     .bubble {
         font-weight: bold;
         background-color: #f5eabe;
@@ -75,14 +77,14 @@
     }
     #indexLeftColumn {
         text-align: left;
-        height: 600px;
+        height: 700px;
         width: 350px;
         float: left;
         background-color: #c3e3e0
     }
     #indexRightColumn {
-        text-align: right;
-        height: 600px;
+        text-align: left;
+        height: 700px;
         width: 900px;
         float: left;
         background-color: #ebc5cf
@@ -92,9 +94,9 @@
         line-height: 1.4em;
     }
     .cuisineBox {
-        height: 260px;
-        width: 260px;
-        margin: 21px 14px 6px;
+        height: 300px;
+        width: 300px;
+        margin: 21px 50px 20px;
         float: left;
         background-color: #c3e3e5
     }
@@ -138,14 +140,27 @@
 <div id="indexRightColumn">
     <c:forEach var="cuisine" items="${cuisine.rows}">
     </c:forEach>
+    
     <c:forEach var="cuisine" items="${cuisines}">
         <div class="cuisineBox">
-            <a href="<c:url value='cuisine?${cuisine.id}'/>">
+            <a href="cuisine?${cuisine.id}">
                 <span class="cuisineLabel"></span>
-                <span class="cuisineLabelText">${cuisine.name}</span>
+                
+                <span class="cuisineLabelText">
+            
+                   <center> 
+                       ${cuisine.name}                
+                   </center>
 
-                <img src="${initParam.cuisineImagePath}${cuisine.name}.jpg"
-                     alt="<fmt:message key='${cuisine.name}'/>" class="cuisineImage">
+                </span>
+
+                <center>
+                    
+                    <img src= "mcoFoodsMarket/${cuisine.name}.jpg" 
+                         width="300" 
+                         height="300"/>
+                     
+                </center>
             </a>
         </div>
     </c:forEach>

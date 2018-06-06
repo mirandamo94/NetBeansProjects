@@ -3,16 +3,16 @@
     <style>
         #footer {
         height: 60px;
-        width: 350px;
+        width: 1200px;
         clear: left;
-        background-color: #ebc5cf
+        background-color: #ffffff
     }
 
-        #footerText { margin-top: 5px }
+        #footerText { margin-top: 10px }
 
         #footerDivider {
-            margin: 0 25px;
-            width: 300px;
+            margin: 125px;
+            width: 1200px;
         }
     </style>
 </head>
