@@ -12,18 +12,18 @@ import Entity.Product;
  *
  * @author mirandamo
  */
-class MyCartItems {
+public class MyCartItems {
     
     Product product;
     short q;
 
-    MyCartItems(Product product) {
+    public MyCartItems(Product product) {
        //To change body of generated methods, choose Tools | Templates.
        q =1; //automatic 
        this.product = product;
     }
 
-    Object getProduct() {
+    public Product getProduct() {
         //To change body of generated methods, choose Tools | Templates.
         return product;
     }

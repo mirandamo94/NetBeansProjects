@@ -145,7 +145,7 @@ body {
 
             <div id="cuisineLeftColumn">
 
-                <c:forEach var="cuisine" items="${categories.rows}">
+                <c:forEach var="cuisine" items="${cuisine.rows}">
                     <c:choose>
                         <c:when test="${cuisine.id == pageContext.request.queryString}">
                             <div class="cuisineButton" id="selectedCuisine">

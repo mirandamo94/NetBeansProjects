@@ -63,16 +63,19 @@ public class MCOControllerServlet extends HttpServlet {
 
         String userPath = request.getServletPath();
         HttpSession session = request.getSession();
+        Cuisine selectedCuisine;
+        Collection<Product> cuisineProducts; 
         
         // if cuisine page is requested
         if (userPath.equals("/cuisine")) {
             // TODO: Implement cuisine request
             String cuisineID = request.getQueryString();
+            
             if (cuisineID !=null){
                 
-              Cuisine selectedCuisine = cuisineFacade.find(Short.parseShort(cuisineID));
+              selectedCuisine = cuisineFacade.find(Short.parseShort(cuisineID));
               request.setAttribute("selectedCuisine", selectedCuisine);
-              Collection<Product> cuisineProducts = selectedCuisine.getProductCollection();
+              cuisineProducts = selectedCuisine.getProductCollection();
               request.setAttribute("cuisineProducts", cuisineProducts);
             }
 
@@ -81,16 +84,16 @@ public class MCOControllerServlet extends HttpServlet {
             // TODO: Implement cart page request
             String clean = request.getParameter("clear");
             if((clean !=null) && clean.equals("true")){
-                MyCart mycart = (MyCart) session.getAttribute("cart");
-                mycart.clearMyCart();
+                MyCart cart = (MyCart) session.getAttribute("cart");
+                cart.clearMyCart();
             }
             userPath = "/cart";
 
         // if checkout page is requested
         } else if (userPath.equals("/checkout")) {
             // TODO: Implement checkout page request
-            MyCart mycart = (MyCart) session.getAttribute("cart");
-            mycart.getTotalAmount();
+            MyCart cart = (MyCart) session.getAttribute("cart");
+            cart.getTotalAmount();
 
         
         } 
@@ -118,21 +121,21 @@ public class MCOControllerServlet extends HttpServlet {
 
         String userPath = request.getServletPath();
         HttpSession s = request.getSession();
-        MyCart mycart = (MyCart) s.getAttribute("cart");
+        MyCart cart = (MyCart) s.getAttribute("cart");
         
 
         // if addToCart action is called
         if (userPath.equals("/addToCart")) {
             // TODO: Implement add product to cart action
-            if(mycart ==null){
-                mycart = new MyCart();
-                s.setAttribute("cart", mycart);
+            if(cart ==null){
+                cart = new MyCart();
+                s.setAttribute("cart", cart);
             }
             
             String productID = request.getParameter("ProductId");
             if(!productID.isEmpty()){
                 Product product = productFacade.find(Integer.parseInt(productID));
-                mycart.addItem(product);
+                cart.addItem(product);
             }
             
             userPath = "/cuisine";
@@ -142,7 +145,8 @@ public class MCOControllerServlet extends HttpServlet {
             // TODO: Implement update cart action
             String productID = request.getParameter("productId");
             String quan = request.getParameter("quantity");
-            
+            Product product = productFacade.find(Integer.parseInt(productID));
+            cart.updateItem(quan,product);
             userPath = "/cart";
         // if purchase action is called
         } else if (userPath.equals("/purchase")) {
