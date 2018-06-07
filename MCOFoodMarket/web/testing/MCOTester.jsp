@@ -11,7 +11,7 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-    <sql:query var="result" dataSource="jdbc/mcofoodmarket">
+    <sql:query var="result" dataSource="jdbc/MCOFoodMarket">
         SELECT * FROM product
     </sql:query>
         

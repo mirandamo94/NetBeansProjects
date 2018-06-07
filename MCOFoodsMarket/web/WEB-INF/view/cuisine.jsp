@@ -128,7 +128,7 @@ body {
 <body> 
 <c:set var='view' value='/cuisine' scope = 'session'/>  
 
-<sql:query var="categories" dataSource="jdbc/mcofoodsmarket">
+<sql:query var="cuisines" dataSource="jdbc/MCOFoodMarket">
     SELECT * FROM cuisine
 </sql:query>
 
