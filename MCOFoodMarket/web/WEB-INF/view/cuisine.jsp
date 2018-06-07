@@ -197,7 +197,7 @@ body {
                                            value="${product.id}">
                                     <input type="submit"
                                            name="submit"
-                                           value="addToCart"/>
+                                           value="Add To Cart"/>
                                            
                                 </form>
                             </td>

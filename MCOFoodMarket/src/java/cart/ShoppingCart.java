@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package shoppingCart;
+package cart;
 
 import entity.Product;
 import java.util.ArrayList;
@@ -48,10 +48,7 @@ public class ShoppingCart {
  
     public synchronized void update(Product product, String quantity) {
 
-        short qty = -1;
-
-        // cast quantity as short
-        qty = Short.parseShort(quantity);
+        short qty = Short.parseShort(quantity);
 
         if (qty >= 0) {
 
@@ -99,7 +96,7 @@ public class ShoppingCart {
     }
 
    
-    public synchronized double gettotalAmount() {
+    public synchronized double getSubtotal() {
 
         double amount = 0;
 
@@ -112,6 +109,18 @@ public class ShoppingCart {
         return amount;
     }
 
+    public synchronized void calculateTotal(String surcharge) {
+
+        double amount = 0;
+
+        // cast surcharge as double
+        double s = Double.parseDouble(surcharge);
+
+        amount = this.getSubtotal();
+        amount += s;
+
+        totalAmount = amount;
+    }
    
    
     public synchronized void clear() {
@@ -119,5 +128,9 @@ public class ShoppingCart {
         itemNum = 0;
         totalAmount = 0;
     }
+    
+    public synchronized double getTotalAmount() {
 
+        return totalAmount;
+    }
 }

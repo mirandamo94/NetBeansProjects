@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package shoppingCart;
+package cart;
 
 import entity.Product;
 
@@ -41,7 +41,7 @@ public class ShoppingCartItems {
         quantity--;
     }
 
-    public double getTotal() {
+    public double getTotalAmount() {
         double amount = (this.getQuantity() * product.getPrice().doubleValue());
         return amount;
     }

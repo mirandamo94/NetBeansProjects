@@ -8,19 +8,18 @@ package controller;
 import entity.Cuisine;
 import entity.Product;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Collection;
 import javax.ejb.EJB;
-import javax.faces.validator.Validator;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.jboss.weld.context.http.Http;
 import session.CuisineFacade;
-import shoppingCart.ShoppingCart;
+import session.ProductFacade;
+import cart.ShoppingCart;
 
 /**
  *
@@ -46,12 +45,15 @@ public class MCOServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @EJB
+    private ProductFacade productFacade;
+    @EJB
     private CuisineFacade cuisineFacade;
-    
+    private String surcharge;
     @Override
-    public void init() throws ServletException{
-        
+    public void init(ServletConfig servletConfig) throws ServletException{
+        super.init(servletConfig);
         getServletContext().setAttribute("cuisines", cuisineFacade.findAll());
+        surcharge = servletConfig.getServletContext().getInitParameter("deliverySurcharge");
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -87,7 +89,7 @@ public class MCOServlet extends HttpServlet {
             ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
 
             
-            cart.gettotalAmount();
+            cart.calculateTotal(surcharge);
 } 
         // use RequestDispatcher to forward request internally
         String url = "/WEB-INF/view" + userPath + ".jsp";
@@ -118,10 +120,35 @@ public class MCOServlet extends HttpServlet {
         // if addToCart action is called
         if (userPath.equals("/addToCart")) {
             // TODO: Implement add product to cart action
+            if (cart == null) {
 
+                cart = new ShoppingCart();
+                session.setAttribute("cart", cart);
+            }
+            String productId = request.getParameter("productId");
+
+            if (!productId.isEmpty()) {
+
+                Product product = productFacade.find(Integer.parseInt(productId));
+                cart.addItem(product);
+            }
+
+            userPath = "/cuisine";
         // if updateCart action is called
         } else if (userPath.equals("/updateCart")) {
             // TODO: Implement update cart action
+            String productId = request.getParameter("productId");
+            String quantity = request.getParameter("quantity");
+
+            //boolean invalidEntry = validator.validateQuantity(productId, quantity);
+
+            //if (!invalidEntry) {
+
+                Product product = productFacade.find(Integer.parseInt(productId));
+                cart.update(product, quantity);
+            //}
+
+            userPath = "/cart";
 
         // if purchase action is called
         } else if (userPath.equals("/purchase")) {

@@ -5,6 +5,11 @@
             30
         </session-timeout>
     </session-config>
+    <context-param>
+        <description>The delivery surcharge applied to all orders</description>
+        <param-name>deliverySurcharge</param-name>
+        <param-value>3.00</param-value>
+    </context-param>
     <jsp-config>
         <jsp-property-group>
             <description>header and footer settings</description>
