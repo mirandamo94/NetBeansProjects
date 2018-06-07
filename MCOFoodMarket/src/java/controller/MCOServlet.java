@@ -20,6 +20,8 @@ import javax.servlet.http.HttpSession;
 import session.CuisineFacade;
 import session.ProductFacade;
 import cart.ShoppingCart;
+import java.util.Map;
+//import session.OrderManager;
 
 /**
  *
@@ -44,6 +46,8 @@ public class MCOServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    //@EJB
+    //private OrderManager orderManager;
     @EJB
     private ProductFacade productFacade;
     @EJB
@@ -87,8 +91,6 @@ public class MCOServlet extends HttpServlet {
         } else if (userPath.equals("/checkout")) {
 
             ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-
-            
             cart.calculateTotal(surcharge);
 } 
         // use RequestDispatcher to forward request internally
@@ -132,8 +134,8 @@ public class MCOServlet extends HttpServlet {
                 Product product = productFacade.find(Integer.parseInt(productId));
                 cart.addItem(product);
             }
-
-            userPath = "/cuisine";
+             userPath = "/cuisine";
+            
         // if updateCart action is called
         } else if (userPath.equals("/updateCart")) {
             // TODO: Implement update cart action
@@ -144,17 +146,43 @@ public class MCOServlet extends HttpServlet {
 
             //if (!invalidEntry) {
 
-                Product product = productFacade.find(Integer.parseInt(productId));
-                cart.update(product, quantity);
+            Product product = productFacade.find(Integer.parseInt(productId));
+            cart.update(product, quantity);
             //}
 
             userPath = "/cart";
 
         // if purchase action is called
         } else if (userPath.equals("/purchase")) {
-            // TODO: Implement purchase action
+            
+             
+             if (cart != null) {
+                //make sure user's cart is not empty before requesting an order and user information
+                String name = request.getParameter("name");
+                String email = request.getParameter("email");
+                String phone = request.getParameter("phone");
+                String address = request.getParameter("address");
+                String location = request.getParameter("location");
+                String cc = request.getParameter("creditCardNum");
+                
+                
+             //  int orderId = orderManager.placeOrder(name,email,phone,address,location,cc,cart);
+                
+               // if (orderId !=0){
+               //     cart = null;
+              //      Map orderMap = orderManager.getOrderDetails(orderId);
+//                    request.setAttribute("user",orderMap.get("user"));
+//                    request.setAttribute("products",orderMap.get("products"));
+//                    request.setAttribute("orderedProducts",orderMap.get("orderedProducts"));
+//                    request.setAttribute("orderRecord",orderMap.get("orderRecord"));
+                     userPath = "/confirmation";
+//                }
+             //  else{
+              //       userPath = "/checkout";
+              //  }
+            }
 
-            userPath = "/confirmation";
+           
         }
 
         // use RequestDispatcher to forward request internally

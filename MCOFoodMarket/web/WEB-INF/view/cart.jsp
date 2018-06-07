@@ -43,9 +43,9 @@
         <%-- clear cart widget --%>
         <c:if test="${!empty cart && cart.itemNum != 0}">
 
-           <%--  <c:url var="url" value="viewCart">
+            <c:url var="url" value="viewCart">
                 <c:param name="clear" value="true"/>
-            </c:url> --%>
+            </c:url> 
 
             <a href="${url}" class="bubble hMargin">clear cart</a>
         </c:if>
@@ -64,7 +64,7 @@
             </c:choose>
         </c:set>
 
-        <%-- <c:url var="url" value="${value}"/> --%>
+        <c:url var="url" value="${value}"/> 
         <a href="${url}" class="bubble hMargin">continue shopping</a>
 
         <%-- checkout widget --%>
@@ -75,7 +75,7 @@
 
     <c:if test="${!empty cart && cart.itemNum != 0}">
 
-      <h4 id="subtotal">subtotal: &#036; ${cart.subtotal}> </h4>
+      <h4 id="subtotal">Subtotal: &#036; ${cart.subtotal} </h4>
 
       <table id="cartTable">
 
@@ -108,7 +108,7 @@
             </td>
 
             <td>
-                <form action="'updateCart" method="post">
+                <form action="updateCart" method="post">
                     <input type="hidden"
                            name="productId"
                            value="${product.id}">

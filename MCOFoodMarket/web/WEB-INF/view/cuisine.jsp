@@ -166,16 +166,11 @@ body {
     
      <div id="cuisineRightColumn">
 
-                <p id="cuisineTitle">
-                    
-                    ${selectedCuisine.name}
-                    
-                </p>
-                
+                <p id="cuisineTitle">                  
+                    ${selectedCuisine.name}                   
+                </p>     
                   <table id="productTable">
-
                     <c:forEach var="product" items="${cuisineProducts}" varStatus="iter">
-
                         <tr class="${((iter.index % 2) == 0) ? 'lightPink' : 'white'}">
                             <td>
                                 <img src="mcoFoodsMarket/${product.name}.jpg"
@@ -191,7 +186,7 @@ body {
                                 &#36; ${product.price} / serving
                             </td>
                             <td>
-                                <form action="addToCart" method="post">
+                                <form action="<c:url value='addToCart'/>" method="post">
                                     <input type="hidden"
                                            name="productId"
                                            value="${product.id}">

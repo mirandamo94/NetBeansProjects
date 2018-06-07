@@ -12,7 +12,7 @@
         #checkoutTable {
     width: 405px;
     padding: 10px;
-    background-color: #f5eabe;
+    background-color: #ebc5cf;
     float: left;
     border-radius: 4px;
 }
@@ -52,7 +52,7 @@
     <body>
         <div id="singleColumn">
 
-    <h2>checkout</h2>
+    <h2>Checkout</h2>
 
     <p>Thank you for your interest in MCO Food Market, please fill out the information below:</p>
 
@@ -102,7 +102,7 @@
                            value="${param.address}">
 
                     <br>
-                    <td><label for="location">Location: </label></td>
+                    US Location: 
                     <select name="location">
                       <c:forEach begin="1" end="10" var="locationNumber">
                         <option value="${regionNumber}"
@@ -124,7 +124,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <input type="submit" value="submit purchase">
+                    <input type="submit" value="Submit Purchase">
                 </td>
             </tr>
         </table>

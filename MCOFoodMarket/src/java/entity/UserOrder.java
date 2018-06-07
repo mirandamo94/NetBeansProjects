@@ -65,6 +65,7 @@ public class UserOrder implements Serializable {
     private User userId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userOrder")
     private Collection<OrderedProduct> orderedProductCollection;
+    private User u;
 
     public UserOrder() {
     }
@@ -152,5 +153,15 @@ public class UserOrder implements Serializable {
     public String toString() {
         return "entity.UserOrder[ id=" + id + " ]";
     }
+
+//    public User getUser() {
+//       //To change body of generated methods, choose Tools | Templates.
+//       return u;
+//    }
+//
+//    public void setUser(User u) {
+//        //To change body of generated methods, choose Tools | Templates.
+//        this.u=u;
+//    }
     
 }
